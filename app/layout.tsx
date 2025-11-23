@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Walrus Estate · Sui Data Game",
   description:
     "Gamified data estates on Sui & Walrus – connect your wallet, manage data nodes, and explore on-chain data economics.",
+  icons: {
+    icon: "/images/walrus_estate.png",
+  },
 };
 
 export default function RootLayout({
