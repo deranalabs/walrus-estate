@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Walrus Estate brand colors, aligned with logo */
+  --color-walrus-dark: #020617; /* deep navy/sea */
+  --color-walrus-card: #020a16; /* slightly lighter card surface */
+  --color-walrus-accent: #38bdf8; /* ice/cyan accent */
+  --color-walrus-secondary: #0ea5e9; /* secondary blue accent */
+  --color-walrus-gold: #facc15; /* logo text gold */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

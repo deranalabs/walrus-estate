@@ -1,0 +1,11 @@
+[package]
+name = "WalrusEstate"
+version = "0.0.1"
+authors = ["deranalabs"]
+edition = "2024"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
+
+[addresses]
+walrus_estate = "0x0"
