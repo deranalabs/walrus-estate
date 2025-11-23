@@ -6,6 +6,28 @@ This README is the main entry point for judges and contributors. It explains wha
 
 ---
 
+**Live Demo:** https://walrus-estate-rhernboau-byeumoov.vercel.app  
+**GitHub Repository:** https://github.com/deranalabs/walrus-estate  
+**Sui Testnet Faucet:** https://faucet.sui.io/?network=testnet  
+**Walrus Haulout Handbook:** https://mystenlabs.notion.site/Walrus-Haulout-Hackathon-Participant-Handbook-2886d9dcb4e980e2adc1d047a95dfef8
+
+## Quickstart for Judges
+
+1. **Open the live demo**: https://walrus-estate-rhernboau-byeumoov.vercel.app
+2. **Install & unlock a Sui wallet** (e.g. Sui Wallet, Ethos) and switch the network to **testnet**.
+3. **Get testnet SUI** from the official faucet: https://faucet.sui.io/?network=testnet.
+4. **Go to `/game`** and connect your wallet using the Sui dApp Kit `Connect` button in the header.
+5. **Roll the dice** several times:
+   - Each roll calls the on‑chain `log_roll` function on Sui testnet.
+   - The System Log panel shows transaction digests and AI turns.
+6. **Buy node #1 – “Cache Node Alpha”** when you land on it:
+   - The dApp sends an on‑chain `buy_node` call for node #1.
+   - The local board only updates ownership after on‑chain confirmation.
+
+This flow demonstrates how Walrus Estate ties together Sui wallet flows, Walrus‑backed tiles, and a minimal on‑chain game loop.
+
+---
+
 ## Table of Contents
 
 1. [Vision & Positioning](#vision--positioning)
@@ -238,118 +260,6 @@ This will run the optimized production build on the configured port (default 300
 
 ---
 
-## Landing Page Specification
-
-**Routes:**
-- `/` – Landing / marketing home (renders the landing page component).
-- `/game` – Interactive Walrus Estate board game.
-
-### 1. Hero Section
-
-**Goal:** Immediately communicate what Walrus Estate is and why it is interesting.
-
-Elements:
-
-- Title:  
-  > Walrus Estate – Gamified Data Estates on Sui
-
-- Subtitle:  
-  > Own, trade, and manage data nodes backed by Walrus decentralized storage.
-
-- Calls to action:
-  - `Play on Testnet` → link to `/game` (or deployed URL).
-  - `View on GitHub` → link to this repository.
-  - (Optional) `Watch Demo` → link to hackathon demo video.
-
-- Visual:
-  - Screenshot of the board (as in the app) as the main mockup.
-
-### 2. Problem & Solution
-
-Two columns:
-
-- **Problem:**
-  - Ownership of data is invisible and centralized.
-  - Hard to onboard users into DA & programmable storage.
-
-- **Solution (Walrus Estate):**
-  - Visual board representing data nodes.
-  - Game loop that simulates incentives & ownership.
-
-### 3. How It Works
-
-Three steps:
-
-1. **Connect Wallet**
-   - Connect Sui wallet via Sui dApp Kit.
-2. **Acquire Data Nodes**
-   - Buy nodes on board, each linked to Walrus blobs.
-3. **Earn & Manage**
-   - Collect rent or strategize holdings (future on‑chain logic).
-
-Optionally include a simple diagram (grid + wallet + Walrus + Sui) in the landing page.
-
-### 4. Tech Stack Section
-
-Grid cards:
-
-- **Sui** – L1 with Move smart contracts for ownership & logic.
-- **Walrus** – Decentralized, durable data blobs (images/metadata).
-- **Next.js + Tailwind** – Modern frontend.
-- **Sui dApp Kit** – Wallet, RPC, and transaction signing.
-
-### 5. Track Alignment & Hackathon Context
-
-Cards for:
-
-- Track: **Data Economy / Marketplaces**.
-- Alignment:
-  - Data nodes as tradable assets.
-  - Walrus storage ensures durability & provenance.
-
-Optionally include links to the Haulout landing page and DeepSurge project page.
-
-### 6. Screenshots & Demo
-
-- Screenshot 1: Board view (START + nodes).
-- Screenshot 2: Wallet connected, node purchased (highlight tile).
-- Link: Demo video (YouTube/Drive).
-
-### 7. Call To Action
-
-Closing CTAs:
-
-- `Play now on testnet`
-- `Read the docs`
-- `View the code on GitHub`
-
----
-
-## Game dApp UX Specification
-
-**Route:** `/game` (game board).
-
-Key UX elements:
-
-- **Wallet Panel:**
-  - Shows:
-    - Connected address (shortened).
-    - Network (testnet).
-  - States:
-    - If **not connected**:
-      - Show a message “Connect wallet to start playing”.
-      - Disable `ROLL DICE` & `BUY NODE`.
-- **GameLog:**
-  - Logs important events:
-    - Wallet connected / disconnected.
-    - Successful buys (on‑chain / off‑chain demo).
-    - Transaction digests when Sui transactions are executed.
-- **Board:**
-  - Player‑owned nodes are highlighted differently.
-  - (Optional) Small owner label: “YOU” / “AI / OTHER”.
-
----
-
 ## Wallet & On‑Chain Integration
 
 ### Wallet (Frontend)
@@ -424,127 +334,11 @@ This layering lets Walrus Estate tell a coherent story:
 
 ---
 
-## Development Phases & Timeline
+## Known Limitations (Hackathon Prototype)
 
-_Dates can be adjusted, but the overall development flow is as follows._
-
-### Phase 0 – Current State (Done)
-
-- Game board & UI implemented.
-- Wallet connect via Sui dApp Kit (`ConnectButton`).
-- Hydration issues mitigated.
-
-### Phase 1 – Professional UX & Wallet Awareness (1–2 days)
-
-**Goal:** Demo‑ready, wallet‑aware dApp.
-
-Tasks:
-
-- Add `useCurrentAccount` usage where needed.
-- Wallet panel:
-  - Show address.
-  - Disable actions when not connected.
-- GameLog:
-  - Log connect/disconnect.
-- Landing page `/`:
-  - Implement Hero, How It Works, Tech Stack, CTA based on the spec above.
-
-Output:
-
-- Clean dApp and landing page.
-- Suitable for early demos and feedback.
-
-### Phase 2 – Move Contract & Basic On‑chain Ownership (3–5 days)
-
-**Goal:** Nodes are truly owned on Sui.
-
-Tasks:
-
-- Develop Move package `walrus_estate`.
-- Implement `init_board`, `buy_node`.
-- Add Move unit tests.
-- Deploy to Sui testnet.
-- Frontend integration:
-  - `handleBuyNode` calls `buy_node`.
-  - GameLog displays transaction digest and status.
-
-Output:
-
-- Proof of node ownership fully on‑chain.
-- Public contract deployed to testnet.
-
-### Phase 3 – Walrus Data Integration (2–3 days)
-
-**Goal:** Each node truly represents Walrus‑backed data.
-
-Tasks:
-
-- Upload node images & metadata to Walrus.
-- Switch `imageUrl` to Walrus aggregator URLs.
-- (Optional) Store board config in Walrus and reference it from chain.
-
-Output:
-
-- Every node has Walrus‑backed data.
-- Documented Walrus integration flow.
-
-### Phase 4 – Polish, Docs, & Submission (2–3 days)
-
-**Goal:** Ready for Haulout submission.
-
-Tasks:
-
-- Polish UX (loading, error states, mobile responsiveness).
-- Write:
-  - `README.md` (main).
-  - `ARCHITECTURE.md`.
-  - `ROADMAP.md` (this document can serve as a base).
-- Prepare:
-  - Demo video ≤ 5 minutes.
-  - (Optional) short pitch deck.
-
-Output:
-
-- Clean repo that is easy for judges to read.
-- Strong landing page + demo flow for evaluation.
-
----
-
-## Release & Submission Checklist
-
-**Code & Product**
-
-- [ ] `npm run build` passes without errors.
-- [ ] Game runs on testnet with wallet connection.
-- [ ] At least one on‑chain node purchase cycle can be demonstrated.
-- [ ] Landing page `/` clearly explains the product.
-
-**Contract & Network**
-
-- [ ] Move package `walrus_estate` deployed to Sui testnet.
-- [ ] Package ID and important objects documented.
-- [ ] Walrus blobs (images & metadata) live and URLs updated.
-
-**Docs**
-
-- [ ] `README.md` explains:
-  - What Walrus Estate is.
-  - How to run it locally.
-  - How to connect to testnet.
-- [ ] `ARCHITECTURE.md` describes:
-  - Frontend, Move, Walrus, (optional backend).
-- [ ] `ROADMAP.md` (or this document) outlines future development and vision.
-
-**Hackathon Submission**
-
-- [ ] Project created on DeepSurge with:
-  - Name, description, logo.
-  - Website link (`https://...`).
-  - GitHub repository link.
-- [ ] Demo video (≤ 5 minutes) uploaded:
-  - Flow: Landing → connect → play → buy node → view on chain.
-- [ ] (Optional) Pitch deck PDF:
-  - Problem, Solution, Architecture, Track fit, Roadmap.
+- Only node **#1 – "Cache Node Alpha"** is wired to the on‑chain `buy_node` demo. Purchases of other nodes are simulated locally in the frontend.
+- Board state is primarily driven by local game logic; a full chain‑synchronized board (state rehydration on reload) is out of scope for this prototype.
+- Seal and Nautilus integrations are **designed and documented**, but not yet wired into live Seal key servers or Nautilus enclaves.
 
 ---
 
