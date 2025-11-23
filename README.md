@@ -6,7 +6,7 @@ This README is the main entry point for judges and contributors. It explains wha
 
 ---
 
-**Live Demo:** https://walrus-estate-rhernboau-byeumoov.vercel.app  
+**Live Demo:** https://walrus-estate.vercel.app/  
 **GitHub Repository:** https://github.com/deranalabs/walrus-estate  
 **Sui Testnet Faucet:** https://faucet.sui.io/?network=testnet  
 **Walrus Haulout Handbook:** https://mystenlabs.notion.site/Walrus-Haulout-Hackathon-Participant-Handbook-2886d9dcb4e980e2adc1d047a95dfef8
